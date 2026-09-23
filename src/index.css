@@ -1,0 +1,169 @@
+@import "tailwindcss";
+
+/* 1. Define Custom Theme Colors and Fonts (Tailwind v4 Syntax) */
+@theme {
+  /* Primary Brand Colors (Trust & Finance - Deep Blue/Indigo) */
+  --color-brand-primary: #4f46e5; /* Indigo 600 */
+  --color-brand-primary-hover: #4338ca; /* Indigo 700 */
+  --color-brand-secondary: #0f766e; /* Teal 700 for Growth/Savings */
+
+  /* Financial Status Colors */
+  --color-finance-success: #10b981; /* Emerald 500 (Savings/Income) */
+  --color-finance-danger: #ef4444; /* Red 500 (Expenses/Loans/Overdraft) */
+  --color-finance-warning: #f59e0b; /* Amber 500 (Pending/Fines) */
+  
+  /* Neutral Backgrounds */
+  --color-brand-bg: #f8fafc; /* Slate 50 */
+  --color-brand-surface: #ffffff; /* White cards */
+  --color-brand-border: #e2e8f0; /* Slate 200 */
+  --color-brand-text: #1e293b; /* Slate 800 */
+  --color-brand-text-muted: #64748b; /* Slate 500 */
+
+  /* Typography */
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+/* 2. Base Styles */
+@layer base {
+  body {
+    background-color: var(--color-brand-bg);
+    color: var(--color-brand-text);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-bold tracking-tight;
+    color: var(--color-brand-text);
+  }
+
+  /* Custom Scrollbar for a cleaner dashboard feel */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #cbd5e1; /* Slate 300 */
+    border-radius: 4px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8; /* Slate 400 */
+  }
+}
+
+/* 3. Define Custom Utilities (Tailwind v4 way to make them @apply-able) */
+@utility btn {
+  @apply inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg font-semibold text-sm transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed;
+}
+
+@utility card {
+  @apply bg-white p-6 rounded-xl shadow-sm border border-slate-200 transition-shadow hover:shadow-md;
+}
+
+@utility input {
+  @apply w-full px-4 py-2.5 rounded-lg border border-slate-300 bg-white text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all;
+}
+
+@utility badge {
+  @apply px-2.5 py-0.5 inline-flex text-xs font-semibold rounded-full capitalize;
+}
+
+@utility nav-item {
+  @apply w-full flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-medium text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors cursor-pointer;
+}
+
+@utility nav-item-active {
+  @apply bg-indigo-50 text-indigo-600 hover:bg-indigo-50 hover:text-indigo-600;
+}
+
+/* 4. Reusable Component Classes */
+@layer components {
+  
+  /* Buttons */
+  .btn-primary {
+    @apply btn text-white focus:ring-indigo-500;
+    background-color: var(--color-brand-primary);
+  }
+  .btn-primary:hover {
+    background-color: var(--color-brand-primary-hover);
+  }
+
+  .btn-success {
+    @apply btn text-white focus:ring-emerald-500;
+    background-color: var(--color-finance-success);
+  }
+  .btn-success:hover {
+    background-color: #059669; /* Emerald 600 */
+  }
+
+  .btn-danger {
+    @apply btn text-white focus:ring-red-500;
+    background-color: var(--color-finance-danger);
+  }
+  .btn-danger:hover {
+    background-color: #dc2626; /* Red 600 */
+  }
+
+  .btn-ghost {
+    @apply btn bg-slate-100 text-slate-700 hover:bg-slate-200 focus:ring-slate-400;
+  }
+
+  /* Badges */
+  .badge-success {
+    @apply badge bg-emerald-100 text-emerald-800;
+  }
+  .badge-warning {
+    @apply badge bg-amber-100 text-amber-800;
+  }
+  .badge-danger {
+    @apply badge bg-red-100 text-red-800;
+  }
+  .badge-info {
+    @apply badge bg-blue-100 text-blue-800;
+  }
+
+  /* --- ADDED CRITICAL DASHBOARD CSS --- */
+
+  /* Form Labels */
+  .label {
+    @apply block text-sm font-medium text-slate-700 mb-1.5;
+  }
+
+  /* Data Tables (For Members, Loans, Transactions lists) */
+  .table-container {
+    @apply w-full overflow-x-auto rounded-xl border border-slate-200 bg-white shadow-sm;
+  }
+  .table {
+    @apply w-full text-sm text-left text-slate-600 whitespace-nowrap;
+  }
+  .table thead {
+    @apply bg-slate-50 text-xs uppercase text-slate-500;
+  }
+  .table th {
+    @apply px-6 py-4 font-semibold;
+  }
+  .table td {
+    @apply px-6 py-4 border-t border-slate-100;
+  }
+  .table tbody tr:hover {
+    @apply bg-slate-50 transition-colors;
+  }
+
+  /* Modals (For Add Member, Create Meeting, Issue Loan) */
+  .modal-backdrop {
+    @apply fixed inset-0 z-50 flex items-center justify-center bg-slate-900/50 backdrop-blur-sm p-4;
+  }
+  .modal-content {
+    @apply w-full max-w-lg rounded-2xl bg-white p-6 shadow-xl border border-slate-200;
+  }
+  .modal-header {
+    @apply flex items-center justify-between mb-4;
+  }
+  .modal-footer {
+    @apply flex items-center justify-end gap-3 mt-6 pt-4 border-t border-slate-200;
+  }
+}
