@@ -12,6 +12,7 @@ import Loans from './pages/Loans';
 import Finance from './pages/Finance';
 import Welfare from './pages/Welfare';
 import Settings from './pages/Settings';
+import Meetings from './pages/Meetings';
 import Dividends from './pages/Dividends';
 import { Loader2 } from 'lucide-react';
 
@@ -55,6 +56,8 @@ function App() {
           <Route element={<ProtectedRoute />}>
             <Route element={<MainLayout />}>
               <Route path="/" element={<Dashboard />} />
+
+              <Route path="/meetings" element={<Meetings />} />
               <Route path="/savings" element={<Savings />} />
               <Route path="/loans" element={<Loans />} />
               <Route path="/finance" element={<Finance />} />
